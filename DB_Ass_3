@@ -1,0 +1,27 @@
+RDBMS ASSIGNMENT 3
+
+1) select distinct department_id from employees;
+
+2) select * from employees order by first_name desc;
+
+3) select employee_id,first_name,last_name,salary from employees order by salary;
+
+4) select first_name,hire_date from employees where job_id = "IT_PROG" OR job_id = "SA_MAN";
+
+5) select * from employees where employee_id = 150 or employee_id = 160;
+
+6) select first_name,last_name,commission_pct,hire_date from employees where salary < 10000;
+
+7) select * from employees where first_name LIKE "s%" or last_name LIKE "s%";
+
+8) select job_id from employees order by job_id;
+
+9) select * from employees where commission_pct = "Null" and (salary between 5000 and 10000) and department_id = 30;
+
+10) select first_name,last_name from employees where department_id = 90;
+
+11) select distinct country_id from locations;
+
+12) select * from employees where job_id = "IT_PROG" or job_id = "FI_ACCOUNT";
+
+13) select country_id from locations order by country_id;

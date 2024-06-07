@@ -1,0 +1,221 @@
+Que1)select odate ,COUNT(DISTINCT snum) from orders group by odate;
++------------+----------------------+
+| odate      | COUNT(DISTINCT snum) |
++------------+----------------------+
+| 1990-10-03 |                    4 |
+| 1990-10-04 |                    3 |
++------------+----------------------+
+
+Que2)  select CONCAT("For the city"," ", city ," the higest ratingis :"
+," ",max(rating)) from customers GROUP by city;
++----------------------------------------------------------------------------+
+| CONCAT("For the city"," ", city ," the higest ratingis :"," ",max(rating)) |
++----------------------------------------------------------------------------+
+| For the city London the higest ratingis : 100                              |
+| For the city Rome the higest ratingis : 200                                |
+| For the city San Jose the higest ratingis : 300                            |
+| For the city Berlin the higest ratingis : 300                              |
++----------------------------------------------------------------------------+
+
+Que3) select odate ,count(onum) from orders group by odate ;
++------------+-------------+
+| odate      | count(onum) |
++------------+-------------+
+| 1990-10-03 |           5 |
+| 1990-10-04 |           5 |
++------------+-------------+
+
+Que4)select snum ,sum(amt) from orders group by snum having sum(amt)>2565.84;
++------+----------+
+| snum | sum(amt) |
++------+----------+
+| 1001 | 15382.07 |
+| 1002 |  5546.15 |
++------+----------+
+
+Que5)select city,max(rating) from customers group by city;
++----------+-------------+
+| city     | max(rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+
+
+Que6)select snum,amt from orders where amt>3000;
++------+---------+
+| snum | amt     |
++------+---------+
+| 1002 | 5160.45 |
+| 1001 | 4723.00 |
+| 1001 | 9891.88 |
++------+---------+
+
+
+Que7)select cnum,min(amt) from orders group by cnum order by cnum;
++------+----------+
+| cnum | min(amt) |
++------+----------+
+| 2001 |   767.19 |
+| 2002 |  1713.23 |
+| 2003 |  5160.45 |
+| 2004 |    75.75 |
+| 2006 |  4723.00 |
+| 2007 |  1900.10 |
+| 2008 |    18.69 |
++------+----------+
+
+
+----------------------------------------------------------------------------------------------------
+
+
+Que1)  select MANAGER_ID,EMPLOYEE_ID,JOB_ID from employees where JOB_ID="SA_MAN";
++------------+-------------+--------+
+| MANAGER_ID | EMPLOYEE_ID | JOB_ID |
++------------+-------------+--------+
+|        100 |         145 | SA_MAN |
+|        100 |         146 | SA_MAN |
+|        100 |         147 | SA_MAN |
+|        100 |         148 | SA_MAN |
+|        100 |         149 | SA_MAN |
++------------+-------------+--------+
+
+
+QUE2) select COUNTRY_ID,REGION_ID FROM countries WHERE COUNTRY_NAME="India";
++------------+-----------+
+| COUNTRY_ID | REGION_ID |
++------------+-----------+
+| IN         |         3 |
++------------+-----------+
+
+
+Que3) select DEPARTMENT_ID ,AVG(SALARY),COMMISSION_PCT FROM employees group by DEPARTMENT_ID,COMMISSION_PCT HAVING COMMISSION_PCT > 0;
++---------------+--------------+----------------+
+| DEPARTMENT_ID | AVG(SALARY)  | COMMISSION_PCT |
++---------------+--------------+----------------+
+|            80 | 14000.000000 |           0.40 |
+|            80 | 10428.571429 |           0.30 |
+|            80 |  8942.857143 |           0.20 |
+|            80 |  9383.333333 |           0.25 |
+|            80 |  7800.000000 |           0.15 |
+|            80 |  9500.000000 |           0.35 |
+|            80 |  6483.333333 |           0.10 |
+|             0 |  7000.000000 |           0.15 |
++---------------+--------------+----------------+
+8 rows in set (0.00 sec)
+
+QUE4) SELECT JOB_ID, COUNT(EMPLOYEE_ID),SUM(SALARY),MAX(SALARY)-MIN(SALARY) FROM employees GROUP BY JOB_ID;
++------------+--------------------+-------------+-------------------------+
+| JOB_ID     | COUNT(EMPLOYEE_ID) | SUM(SALARY) | MAX(SALARY)-MIN(SALARY) |
++------------+--------------------+-------------+-------------------------+
+| AC_ACCOUNT |                  1 |     8300.00 |                    0.00 |
+| AC_MGR     |                  1 |    12000.00 |                    0.00 |
+| AD_ASST    |                  1 |     4400.00 |                    0.00 |
+| AD_PRES    |                  1 |    24000.00 |                    0.00 |
+| AD_VP      |                  2 |    34000.00 |                    0.00 |
+| FI_ACCOUNT |                  5 |    39600.00 |                 2100.00 |
+| FI_MGR     |                  1 |    12000.00 |                    0.00 |
+| HR_REP     |                  1 |     6500.00 |                    0.00 |
+| IT_PROG    |                  5 |    28800.00 |                 4800.00 |
+| MK_MAN     |                  1 |    13000.00 |                    0.00 |
+| MK_REP     |                  1 |     6000.00 |                    0.00 |
+| PR_REP     |                  1 |    10000.00 |                    0.00 |
+| PU_CLERK   |                  5 |    13900.00 |                  600.00 |
+| PU_MAN     |                  1 |    11000.00 |                    0.00 |
+| SA_MAN     |                  5 |    61000.00 |                 3500.00 |
+| SA_REP     |                 30 |   250500.00 |                 5400.00 |
+| SH_CLERK   |                 20 |    64300.00 |                 1700.00 |
+| ST_CLERK   |                 20 |    55700.00 |                 1500.00 |
+| ST_MAN     |                  5 |    36400.00 |                 2400.00 |
++------------+--------------------+-------------+-------------------------+
+
+QUE5)select JOB_ID,AVG(SALARY) FROM employees GROUP BY JOB_ID HAVING AVG(SALARY)>10000;
++---------+--------------+
+| JOB_ID  | AVG(SALARY)  |
++---------+--------------+
+| AC_MGR  | 12000.000000 |
+| AD_PRES | 24000.000000 |
+| AD_VP   | 17000.000000 |
+| FI_MGR  | 12000.000000 |
+| MK_MAN  | 13000.000000 |
+| PU_MAN  | 11000.000000 |
+| SA_MAN  | 12200.000000 |
++---------+--------------+
+
+
+QUE6) SELECT YEAR(HIRE_DATE) FROM employees GROUP BY YEAR(HIRE_DATE) HAVING COUNT(YEAR(HIRE_DATE)) >10;
++-----------------+
+| YEAR(HIRE_DATE) |
++-----------------+
+|            1987 |
++-----------------+
+
+QUE7) SELECT DEPARTMENT_ID,COMMISSION_PCT,COUNT(DEPARTMENT_ID) FROM employees group by DEPARTMENT_ID,COMMISSION_PCT HAVING COUNT(DEPARTMENT_ID)>5 and COMMISSION_PCT>
+0.0;
++---------------+----------------+----------------------+
+| DEPARTMENT_ID | COMMISSION_PCT | COUNT(DEPARTMENT_ID) |
++---------------+----------------+----------------------+
+|            80 |           0.30 |                    7 |
+|            80 |           0.20 |                    7 |
+|            80 |           0.25 |                    6 |
+|            80 |           0.10 |                    6 |
++---------------+----------------+----------------------+
+
+QUE8) SELECT EMPLOYEE_ID FROM employees group by EMPLOYEE_ID HAVING COUNT(EMPLOYEE_ID)>1;
+Empty set (0.00 sec)
+
+QUE9)
+
+
+QUE10) select DEPARTMENT_ID ,YEAR(HIRE_DATE),COUNT(DEPARTMENT_ID) FROM employees group by DEPARTMENT_ID,YEAR(HIRE_DATE);
++---------------+-----------------+----------------------+
+| DEPARTMENT_ID | YEAR(HIRE_DATE) | COUNT(DEPARTMENT_ID) |
++---------------+-----------------+----------------------+
+|            90 |            1987 |                    3 |
+|            60 |            1987 |                    5 |
+|           100 |            1987 |                    6 |
+|            30 |            1987 |                    6 |
+|            50 |            1987 |                   45 |
+|            80 |            1987 |                   34 |
+|             0 |            1987 |                    1 |
+|            10 |            1987 |                    1 |
+|            20 |            1987 |                    2 |
+|            40 |            1987 |                    1 |
+|            70 |            1987 |                    1 |
+|           110 |            1987 |                    2 |
++---------------+-----------------+----------------------+
+
+
+
+QUE11)select count(EMPLOYEE_ID) FROM job_history WHERE YEAR(END_DATE)=YEAR(NOW());
++--------------------+
+| count(EMPLOYEE_ID) |
++--------------------+
+|                  0 |
++--------------------+
+1 row in set (0.00 sec)
+
+
+
+QUE12) SELECT DEPARTMENT_ID FROM employees group by DEPARTMENT_ID HAVING MAX(SALARY)>10000;
++---------------+
+| DEPARTMENT_ID |
++---------------+
+|            20 |
+|            30 |
+|            80 |
+|            90 |
+|           100 |
+|           110 |
++---------------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+
+

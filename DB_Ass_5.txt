@@ -1,0 +1,204 @@
+Que1) SELECT CONCAT(UPPER(LEFT(FIRST_NAME,1)),LOWER(SUBSTRING(FIRST_NAME,2))," ",UPPER(LEFT(LAST_NAME,1)),LOWER(SUBSTRING(LAST_NAME,2))) FROM employees;
+
+Que2) SELECT LEFT(JOB_TITLE,1) FROM jobs;
++-------------------+
+| LEFT(JOB_TITLE,1) |
++-------------------+
+| P                 |
+| A                 |
+| A                 |
+| F                 |
+| A                 |
+| A                 |
+| P                 |
+| S                 |
+| S                 |
+| P                 |
+| P                 |
+| S                 |
+| S                 |
+| S                 |
+| P                 |
+| M                 |
+| M                 |
+| H                 |
+| P                 |
++-------------------+
+19 rows in set 
+Que3) SELECT FIRST_NAME FROM employees WHERE LAST_NAME LIKE "___%b%";
+ +-----------+
+| LAST_NAME |
++-----------+
+| Cambrault |
+| Cambrault |
+| Greenberg |
+| Pataballa |
++-----------+
+
+Que4) SELECT UPPER(FIRST_NAME),LOWER(EMAIL) FROM employees WHERE UPPER(FIRST_NAME)=LOWER(EMAIL);
+Empty set (0.00 sec)
+
+Que5)SELECT FIRST_NAME,SALARY,ROUND(SALARY,-3) FROM employees;
+
+Que6)SELECT EMPLOYEE_ID,END_DATE FROM job_history;
++-------------+------------+
+| EMPLOYEE_ID | END_DATE   |
++-------------+------------+
+|         102 | 1998-07-24 |
+|         101 | 1993-10-27 |
+|         101 | 1997-03-15 |
+|         201 | 1999-12-19 |
+|         114 | 1999-12-31 |
+|         122 | 1999-12-31 |
+|         200 | 1993-06-17 |
+|         176 | 1998-12-31 |
+|         176 | 1999-12-31 |
+|         200 | 1998-12-31 |
+|           0 | 0000-00-00 |
++-------------+------------+
+11 rows in set (0.00 sec)
+
+Que7)SELECT FIRST_NAME,DATE_ADD(LAST_DAY(HIRE_DATE,INTERVAL 1DAY) FROM employees;
+
+Que8) SELECT FIRST_NAME, CONCAT(TIMESTAMPDIFF(YEAR,HIRE_DATE,NOW()),"years"," ",(TIMESTAMPDIFF(MONTH,HIRE_DATE,NOW())%12),"months") as exper
+ence FROM employees;
+
+Que9) select FIRST_NAME FROM employees WHERE HIRE_DATE=2001 ;
+Empty set, 1 warning (0.00 sec)
+
+
+Que10)SELECT FIRST_NAME FROM employees WHERE HIRE_DATE=DATE(NOW());
+Empty set (0.01 sec)
+
+Que11) SELECT DATEDIFF(SYSDATE(),'2011-01-01');
++----------------------------------+
+| DATEDIFF(SYSDATE(),'2011-01-01') |
++----------------------------------+
+|                             4904 |
++----------------------------------+
+
+Que12)SELECT FIRST_NAME FROM employees WHERE DAY(HIRE_DATE)>15;
+
+
+
+Que13)  select FIRST_NAME FROM employees ORDER BY SALARY DESC LIMIT 2,1;
++------------+
+| FIRST_NAME |
++------------+
+| Lex        |
++------------+
+-------------------------------------------------------------------------------------------------------
+
+Que1)SELECT Pname FROM P_ WHERE LEFT(city,1)="L";
++-------+
+| Pname |
++-------+
+| NUT   |
+| Screw |
+| Cog   |
++-------+
+3 rows in set (0.00 sec)
+
+
+Que2)SELECT `J#` FROM J WHERE SUBSTRING(Jname,3,1)="n";
++----+
+| J# |
++----+
+| J2 |
+| J4 |
++----+
+2 rows in set (0.00 sec)
+
+QUE3) select CONCAT(UPPER(LEFT(Sname,1)),LOWER(SUBSTRING(Sname,2))) f
+rom S;
++--------------------------------------------------------+
+| CONCAT(UPPER(LEFT(Sname,1)),LOWER(SUBSTRING(Sname,2))) |
++--------------------------------------------------------+
+| Sname                                                  |
+| Jones                                                  |
+| Blake                                                  |
+| Clark                                                  |
+| Adams                                                  |
++--------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+
+QUE4)SELECT UPPER(Sname) from S;
++--------------+
+| UPPER(Sname) |
++--------------+
+| SNAME        |
+| JONES        |
+| BLAKE        |
+| CLARK        |
+| ADAMS        |
++--------------+
+
+QUE5)select LOWER(Sname) from S;
++--------------+
+| LOWER(Sname) |
++--------------+
+| sname        |
+| jones        |
+| blake        |
+| clark        |
+| adams        |
++--------------+
+
+
+QUE6) select Sname,LENGTH(Sname) from S;
++-------+---------------+
+| Sname | LENGTH(Sname) |
++-------+---------------+
+| Sname |             5 |
+| Jones |             5 |
+| Blake |             5 |
+| Clark |             5 |
+| Adams |             5 |
++-------+---------------+
+
+
+QUE7) SELECT DAYNAME(NOW());
++----------------+
+| DAYNAME(NOW()) |
++----------------+
+| Thursday       |
++----------------+
+
+
+QUE8) SELECT MIN(status) from S;
++-------------+
+| MIN(status) |
++-------------+
+|          10 |
++-------------+
+
+
+QUE9) select max(weight) from P_;
++-------------+
+| max(weight) |
++-------------+
+|          19 |
++-------------+
+
+
+QUE10)  select AVG(weight) from P_;
++-------------+
+| AVG(weight) |
++-------------+
+|     15.1667 |
++-------------+
+
+
+QUE11) select COUNT(Pname) from P_;
++--------------+
+| COUNT(Pname) |
++--------------+
+|            6 |
++--------------+
+
+
+QUE12)  SELECT Sname from S WHERE REPLACE(Sname,"la","ro");
+Empty set, 5 warnings (0.00 sec)
+
+

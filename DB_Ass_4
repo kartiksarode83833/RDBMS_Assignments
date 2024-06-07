@@ -1,0 +1,21 @@
+Q1) SELECT PNAME, COLOR
+FROM P
+WHERE CITY = 'London';
+
+Q2) SELECT Suppliers FROM P WHERE CITY='London';
+
+Q3) SELECT Suppliers FROM P WHERE suppliers IN('Paris','Athens');
+
+Q4) SELECT JOBS FROM P WHERE CITY='Athens';
+
+Q5) SELECT Part names,weight FROM P  WHERE Weight IN(12,14);
+
+Q6) SELECT Suppliers FROM P WHERE Status >= 20;
+
+Q7) SELECT Suppliers FROM P WHERE CITY <> 'London';
+
+Q8) SELECT CITY FROM P WHERE Suppliers = 'city';
+
+Q9) SELECT Suppliers FROM P WHERE CITY ORDER BY DESC;
+
+Q10) SELECT Suppliers FROM P WHERE Status BETWEEN(10,20);

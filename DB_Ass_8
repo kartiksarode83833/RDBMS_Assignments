@@ -1,0 +1,127 @@
+RDBMS ASSIGNMENT 8
+
+1) select *  from orders where snum = (select snum from customers where cname = "Cisneros");
+
+2) select cname,rating from customers where cnum = any(select cnum from orders where amt > (select avg(amt) from orders));
+
+3) select snum,sum(amt) from orders group by snum having sum(amt) > (select max(amt) from orders);
+ +------+----------+
+ | snum | sum(amt) |
+ +------+----------+
+ | 1001 | 15382.07 |
+ +------+----------+
+
+4) select cname,rating from customers where rating >= any(select rating from customers where snum = any(select snum from salespeople where sname = "Serres"));
++----------+--------+
+| cname    | rating |
++----------+--------+
+| Giovanni |    200 |
+| Liu      |    200 |
+| Grass    |    300 |
+| Cisneros |    300 |
++----------+--------+
+
+5) 
+select sname,city from salespeople where snum=any(select snum from customers where salespeople.city!=customers.city and salespeople.snum= customers.snum);
++---------+-----------+
+| sname   | city      |
++---------+-----------+
+| Serres  | San Jose  |
+| Motika  | London    |
+| Rifkin  | Barcelona |
+| Axelrod | New York  |
++---------+-----------+
+
+6) select onum,amt from orders where amt > any(select snum from orders where snum = any(select snum from customers where city
+= "London"));
+
+7) select onum from orders where snum = all(select snum from salespeople where sname = "Motika");
++------+
+| onum |
++------+
+| 3002 |
++------+
+
+8) select * from orders where snum = all(select snum from salespeople where snum = all(select snum from customers where city = "London"));
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3008 | 4723.00 | 1990-10-04 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-04 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+9) select sname,snum from salespeople where snum = any(select snum  from customers group by snum having count(snum)>1);
++--------+------+
+| sname  | snum |
++--------+------+
+| Peel   | 1001 |
+| Serres | 1002 |
++--------+------+
+
+10) select snum,sname,city from salespeople where snum = any(select snum  from customers group by snum having count(snum)>1);
++------+--------+----------+
+| snum | sname  | city     |
++------+--------+----------+
+| 1001 | Peel   | London   |
+| 1002 | Serres | San Jose |
++------+--------+----------+
+
+11) select cname,rating from customers where rating > all(select rating from customers where city = "London" );
++----------+--------+
+| cname    | rating |
++----------+--------+
+| Giovanni |    200 |
+| Liu      |    200 |
+| Grass    |    300 |
+| Cisneros |    300 |
++----------+--------+
+
+12) select onum,amt from orders where amt > any(select amt from orders where odate = "1990-10-04");
++------+---------+
+| onum | amt     |
++------+---------+
+| 3003 |  767.19 |
+| 3002 | 1900.10 |
+| 3005 | 5160.45 |
+| 3006 | 1098.16 |
+| 3009 | 1713.23 |
+| 3008 | 4723.00 |
+| 3010 |  309.95 |
+| 3011 | 9891.88 |
++------+---------+
+
+13) select onum,amt from orders where amt < any(select amt from orders where snum = any(select snum from customers where city =
+ "San Jose"));
++------+---------+
+| onum | amt     |
++------+---------+
+| 3001 |   18.69 |
+| 3003 |  767.19 |
+| 3002 | 1900.10 |
+| 3006 | 1098.16 |
+| 3009 | 1713.23 |
+| 3007 |   75.75 |
+| 3008 | 4723.00 |
+| 3010 |  309.95 |
++------+---------+
+
+14)select cname from customers where rating > all(select rating from customers where city = "Paris");
++----------+
+| cname    |
++----------+
+| Hoffman  |
+| Giovanni |
+| Liu      |
+| Grass    |
+| Clemens  |
+| Cisneros |
+| Pereira  |
++----------+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+DB ASSIGNMENT - 7
+
+### SET 1:
+
+1) select c.cname,o.onum from customers c inner join orders o on c.cnum = o.cnum;
+
+2) select distinct c.cname,s.sname,o.onum  from customers c inner join orders o on o.cnum = c.cnum inner join salespeople s on s.snum = c.snum;
+
+3) select distinct c.cname,s.sname,s.comm from customers c inner join salespeople s on s.snum = c.snum where s.comm > 0.12;
+
+4) select distinct s.sname,c.rating,s.comm*rating amount from salespeople s inner join
+customers c on c.snum = s.snum where c.rating > 100;
+
+5) Write a query that produces all pairs of salespeople who are living in the same
+city.Exclude combinations of salespeople with themselves as well as duplicate rows
+with the order reversed.
+
+### SET 2:
+
+1) Display the Supplier name and the Quantity sold.

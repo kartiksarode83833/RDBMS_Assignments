@@ -1,0 +1,97 @@
+1. Create an index that will enable a user to pull orders for ‘1990-10-03’ out of the
+Orders table quickly.
+create index idx_orders_odate on orders(odate);
+select * from orders where year(odate)=1990 and month(odate)=10 and day(odate)=03;
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
++------+---------+------------+------+------+
+5 rows in set (0.00 sec)
+
+
+2. If the Orders table has already been created, how can you force the onum field to be
+unique (assume all current values are unique)?
+
+create  unique index idx_orders2_odate on orders(onum);
+
+3. Create an index that would permit salesperson to retrieve his orders.
+  create index idx_odate_snum on orders(odate,snum);
+Query OK, 0 rows affected (0.40 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+ select s.name,o.onum from salespeople as s 
+    -> inner join orders as o on o.snum=s.snum;
+ERROR 1054 (42S22): Unknown column 's.name' in 'field list'
+mysql> select s.sname,o.onum from salespeople as s  inner join orders as o on o.snum=s.snum;
++---------+------+
+| sname   | onum |
++---------+------+
+| Rifkin  | 3001 |
+| Peel    | 3003 |
+| Motika  | 3002 |
+| Serres  | 3005 |
+| Rifkin  | 3006 |
+| Axelrod | 3009 |
+| Serres  | 3007 |
+| Peel    | 3008 |
+| Serres  | 3010 |
+| Peel    | 3011 |
++---------+------+
+10 rows in set (0.01 sec)
+
+
+4. Let us assume that each salesperson is to have only one customer of a given rating,
+and that this is currently the case. Create an index that enforces it.
+create unique index idx_customers_cnum on customers(cnum);
+select c.rating from customers as c 
+    -> inner join salespeople as s on s.snum=c.snum;
++--------+
+| rating |
++--------+
+|    100 |
+|    100 |
+|    200 |
+|    300 |
+|    200 |
+|    100 |
+|    300 |
++--------+
+7 rows in set (0.00 sec)
+
+
+
+
+5. Create an index to speed up searching order on a given date by given customer.
+
+create index idx_odate_snum on orders(odate,snum);
+Query OK, 0 rows affected (0.40 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select o.odate,c.cnum from orders as o inner join customers as c on c.snum=o.snum;
++------------+------+
+| odate      | cnum |
++------------+------+
+| 1990-10-03 | 2001 |
+| 1990-10-03 | 2006 |
+| 1990-10-03 | 2003 |
+| 1990-10-03 | 2004 |
+| 1990-10-03 | 2007 |
+| 1990-10-03 | 2008 |
+| 1990-10-03 | 2008 |
+| 1990-10-04 | 2001 |
+| 1990-10-04 | 2006 |
+| 1990-10-04 | 2001 |
+| 1990-10-04 | 2006 |
+| 1990-10-04 | 2003 |
+| 1990-10-04 | 2004 |
+| 1990-10-04 | 2003 |
+| 1990-10-04 | 2004 |
+| 1990-10-04 | 2002 |
++------------+------+
+16 rows in set (0.00 sec)
+
+

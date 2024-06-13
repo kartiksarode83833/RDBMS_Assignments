@@ -1,0 +1,215 @@
+                                                               ---DB ASSIGNMENT 10: PSM---
+1) 
+  drop procedure if exists sp_arperi;
+
+  delimiter $$
+  create procedure sp_arperi(in length int,in breadth int)
+  begin
+	declare area int;
+	declare perimeter int;
+	set area = length*breadth;
+	set perimeter = 2*(length+breadth);
+	select length,breadth,area,perimeter;
+  end;
+  $$
+  delimiter ;
+ 
+  mysql> call sp_arperi(4,5);
+
+  +--------+---------+------+-----------+
+  | length | breadth | area | perimeter |
+  +--------+---------+------+-----------+
+  |      4 |       5 |   20 |        18 |
+  +--------+---------+------+-----------+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+2)
+   
+drop procedure if exists sp_sqrcube;
+delimiter $$
+create procedure sp_sqrcube(num int)
+begin
+     DECLARE sqr INT;
+     DECLARE cub INT;
+
+     SET sqr = num * num;
+     SET cub = num * num * num;
+
+     INSERT INTO temp (num, sqr, cub) VALUES (num, sqr, cub);
+
+     SELECT num, sqr, cub;
+end;
+$$
+delimiter ;
+
+mysql> call sp_sqrcube(5);
+
++------+------+------+
+| num  | sqr  | cub  |
++------+------+------+
+|    5 |   25 |  125 |
++------+------+------+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+3)
+drop procedure if exists sp_celfar;
+delimiter $$
+create procedure sp_celfar(in cel int)
+begin
+     declare far double;
+     set far = (9/5)*cel + 32;
+     select cel,far;
+       
+end;
+$$
+delimiter ;
+
+mysql> call sp_celfar(100);
++------+------+
+| cel  | far  |
++------+------+
+|  100 |  212 |
++------+------+
+
+drop procedure if exists sp_farcel;
+delimiter $$
+create procedure sp_farcel(in far int)
+begin
+     declare cel int;
+     set cel = (5/9)*(far-32);
+     select far,cel;
+end;
+$$
+delimiter ;
+
+mysql> call sp_farcel(212);
++------+------+
+| far  | cel  |
++------+------+
+|  212 |  100 |
++------+------+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+4)
+
+drop procedure if exists sp_yafoinch;
+delimiter $$
+create procedure sp_yafoinch(in inches int)
+begin
+	declare yard int;
+	declare foot int;
+	declare inch int;
+	declare inch1 int;
+	declare inch2 int;
+	set yard = inches /36;
+	set inch1 = inches % 36;
+	set foot = inch1/12;
+	set inch2 = inch1%12;
+	set inch =inch2;
+	select inches,yard,foot,inch;
+end;
+$$
+delimiter ;
+
+mysql> call sp_yafoinch(124);
++--------+------+------+------+
+| inches | yard | foot | inch |
++--------+------+------+------+
+|    124 |    3 |    1 |    4 |
++--------+------+------+------+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+5) Your block should read in two real numbers and tell whether the
+product of the two numbers is equal to or greater than 100.
+
+drop procedure if exists sp_pro;
+delimiter $$
+create procedure sp_pro(in num1 int,in num2 int)
+begin
+	if num1*num2 >= 100 then
+	   select "Product is greater than 100";
+	else
+	   select "Product is less than 100";
+	end if;
+	
+	select num1,num2,num1*num2;      
+end;
+$$
+delimiter ;
+
+mysql> call sp_pro(12,9);
++-----------------------------+
+| Product is greater than 100 |
++-----------------------------+
+| Product is greater than 100 |
++-----------------------------+
+1 row in set (0.01 sec)
+
++------+------+-----------+
+| num1 | num2 | num1*num2 |
++------+------+-----------+
+|   12 |    9 |       108 |
++------+------+-----------+
+
+mysql> call sp_pro(6,9);
++--------------------------+
+| Product is less than 100 |
++--------------------------+
+| Product is less than 100 |
++--------------------------+
+1 row in set (0.00 sec)
+
++------+------+-----------+
+| num1 | num2 | num1*num2 |
++------+------+-----------+
+|    6 |    9 |        54 |
++------+------+-----------+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
